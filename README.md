@@ -49,29 +49,31 @@ $$
 
 $T(n) = 3T(\frac{n}{3}) + n^5$
 
-$ = 3(3T(\frac{n}{9}) + \frac{1}{3}n^5) + n^5$
+$ = 3[3T(\frac{n}{9}) + (\frac{n}{3})^5] + n^5$
 
-$ = 9T(\frac{n}{9}) + 2n^5$
+$ = 9T(\frac{n}{9}) + \frac{n^5}{81} + n^5$
 
-$ = 27T(\frac{n}{27}) + 3n^5$
+$ = 9T(\frac{n}{9}) + n^5(1 + \frac{1}{81})$
 
 $...$
 
-$ = 3^iT(n \cdot 3^{-i}) + in^5$
+$T(n) = 3^i T\left(\frac{n}{3^i}\right) + n^5 \sum\limits_{k=0}^{i - 1}(\frac{1}{81})^k$
 
-Let $i = \log_3(n)$
+(Geometric series):
 
-$ 3^{\log_3(n)}T(n \cdot 3^{-\log_3(n)}) + n^5\log_3(n)$
+$ = 3^iT(3^{-i}n) + n^5[\frac{1-(\frac{1}{81})^k}{1-\frac{1}{81}}]$
 
-$ = nT(n \cdot \frac{1}{n}) + n^5\log_3(n)$
+$ = 3^iT(3^{-i}n) + n^5[\frac{81}{80}(1 - 81^{-i})] $
 
-$ = nT(1) + n^5log_3(n)$
+Let $i = \log_3(n)$:
 
-$ = n^5log_3(n)$ + n
+$ = 3^{\log_3(n)}T(3^{-\log_3(n)}n) + n^5[\frac{81}{80}(1 - 81^{-\log_3(n)})] $
 
-$ n^5log_3(n) + n \in O(n^5\log(n))$
+$ = nT(1) + n^5[\frac{81}{80}(1 - (3^{-4\log_3(n)})] $
 
-Therefore, the function has a big O bound of $O(n^5\log(n))$ for runtime.
+$ = n + n^5[\frac{81}{80}(1 - n^{-4})] $
+
+Asymptotically, the term multiplied by $n^5$ doesn't matter, and neither does the $n$ term, so the resulting runtime complexity is $O(n^5)$
 
 ---
 
